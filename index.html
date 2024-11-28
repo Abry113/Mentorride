@@ -4,79 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MentorRide - Vaše jízda s jistotou</title>
-    <!-- Přidání stylů pro FullCalendar -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-        #main-content {
-            text-align: center;
-            padding: 50px 0;
-            background-color: #e9f4ff;
-        }
-        .button {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Modální okénko */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 800px;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Kalendář */
-        #calendar {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-    </style>
+    <!-- Připojení externího CSS pro stylování -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Připojení externího Leaflet CSS pro mapu -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
 
@@ -84,89 +15,50 @@
     <header>
         <h1>MentorRide</h1>
         <nav>
-            <a href="#features">Funkce</a> | <a href="#map">Mapa</a> | <a href="#about">O nás</a> | <a href="#contact">Kontakt</a>
+            <a href="#features">Funkce</a>
+            <a href="#map">Mapa</a>
+            <a href="#about">O nás</a>
+            <a href="#contact">Kontakt</a>
         </nav>
     </header>
 
-    <!-- Hlavní obsah -->
-    <div id="main-content">
+    <!-- Hlavní část -->
+    <section id="hero">
         <h2>Vaše jízda s jistotou</h2>
         <p>Připojte se k platformě, která propojuje nové řidiče s mentory. Získejte praxi a jistotu za volantem.</p>
-        
-        <!-- Tlačítko pro zobrazení kalendáře -->
-        <button class="button" id="calendarButton">Kalendář jízd</button>
-    </div>
+        <a href="#register">Začněte ještě dnes</a>
+    </section>
 
-    <!-- Sekce Funkce -->
-    <section id="features">
-        <h2>Funkce</h2>
+    <!-- Sekce funkcí -->
+    <section id="features" class="features">
         <div class="feature-box">
             <h3>Kalendář jízd</h3>
             <p>Naplánujte si své jízdy rychle a jednoduše.</p>
-            <button class="button" id="calendarButton">Zobrazit kalendář jízd</button>
+        </div>
+        <div class="feature-box">
+            <h3>Najít mentora</h3>
+            <p>Vyhledejte mentora ve vašem okolí a domluvte si schůzku.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Chci být mentorem</h3>
+            <p>Pomáhejte novým řidičům a sdílejte své zkušenosti.</p>
         </div>
     </section>
 
-    <!-- Modální okénko pro kalendář -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Plánujte své jízdy</h2>
-            <div id="calendar"></div>
-        </div>
-    </div>
+    <!-- Sekce mapa -->
+    <section id="map" class="map-container">
+        <h2>Mentoři ve vašem okolí</h2>
+        <div id="map"></div>
+    </section>
 
-    <!-- Script pro FullCalendar -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
-    <script>
-        // Otevření modálního okénka po kliknutí na tlačítko
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("calendarButton");
-        var span = document.getElementsByClassName("close")[0];
+    <!-- Patička -->
+    <footer>
+        <p>&copy; 2024 MentorRide | Vaše jízda s jistotou</p>
+    </footer>
 
-        // Když uživatel klikne na tlačítko "Kalendář jízd"
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Když uživatel klikne na 'x', zavře modální okénko
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Když uživatel klikne mimo modální okénko, zavře ho
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Inicializace kalendáře
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                events: [
-                    {
-                        title: 'Jízda s mentorem',
-                        start: '2024-12-01T10:00:00',
-                        end: '2024-12-01T12:00:00'
-                    },
-                    {
-                        title: 'Dohodnout schůzku',
-                        start: '2024-12-05T14:00:00',
-                        end: '2024-12-05T16:00:00'
-                    }
-                ],
-                editable: true,
-                droppable: true
-            });
-        });
-    </script>
-
+    <!-- Připojení externího JavaScript pro mapu -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Připojení vlastního JavaScriptu -->
+    <script src="script.js"></script>
 </body>
 </html>
