@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorRide - Vaše jízda s jistotou</title>
+    <!-- Připojení externího CSS pro stylování -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Připojení externího Leaflet CSS pro mapu -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <!-- Hlavička -->
+    <header>
+        <h1>MentorRide</h1>
+        <nav>
+            <a href="#features">Funkce</a>
+            <a href="#map">Mapa</a>
+            <a href="#about">O nás</a>
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </header>
+
+    <!-- Hlavní část -->
+    <section id="hero">
+        <h2>Vaše jízda s jistotou</h2>
+        <p>Připojte se k platformě, která propojuje nové řidiče s mentory. Získejte praxi a jistotu za volantem.</p>
+        <a href="#register">Začněte ještě dnes</a>
+    </section>
+
+    <!-- Sekce funkcí -->
+    <section id="features" class="features">
+        <div class="feature-box">
+            <h3>Kalendář jízd</h3>
+            <p>Naplánujte si své jízdy rychle a jednoduše.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Najít mentora</h3>
+            <p>Vyhledejte mentora ve vašem okolí a domluvte si schůzku.</p>
+        </div>
+        <div class="feature-box">
+            <h3>Chci být mentorem</h3>
+            <p>Pomáhejte novým řidičům a sdílejte své zkušenosti.</p>
+        </div>
+    </section>
+
+    <!-- Sekce mapa -->
+    <section id="map" class="map-container">
+        <h2>Mentoři ve vašem okolí</h2>
+        <div id="map"></div>
+    </section>
+
+    <!-- Patička -->
+    <footer>
+        <p>&copy; 2024 MentorRide | Vaše jízda s jistotou</p>
+    </footer>
+
+    <!-- Připojení externího JavaScript pro mapu -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Připojení vlastního JavaScriptu -->
+    <script src="script.js"></script>
+</body>
+</html>
