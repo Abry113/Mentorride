@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    <!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MentorRide - Vaše jízda s jistotou</title>
@@ -34,6 +41,12 @@
         <div class="feature-box">
             <h3>Kalendář jízd</h3>
             <p>Naplánujte si své jízdy rychle a jednoduše.</p>
+            <div class="calendar-container">
+    <h2>Naplánujte si jízdu</h2>
+    <p>Vyberte si datum a čas pro svou jízdu s mentorem.</p>
+    <div id="calendar"></div> <!-- Místo pro kalendář -->
+</div>
+
         </div>
         <div class="feature-box">
             <h3>Najít mentora</h3>
@@ -60,5 +73,35 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Připojení vlastního JavaScriptu -->
     <script src="script.js"></script>
+    <!-- FullCalendar JS - Inicializace kalendáře -->
+<script>
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: [
+                {
+                    title: 'Mentoring Session',
+                    start: '2024-11-29T10:00:00',
+                    end: '2024-11-29T12:00:00',
+                    description: 'Tréninková jízda s mentorem'
+                },
+                {
+                    title: 'Plánovaná jízda',
+                    start: '2024-12-01T15:00:00',
+                    end: '2024-12-01T17:00:00',
+                    description: 'Jízda na dálnici'
+                }
+            ],
+            eventClick: function(calEvent, jsEvent, view) {
+                alert('Jízda: ' + calEvent.title + '\nPopis: ' + calEvent.description);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
