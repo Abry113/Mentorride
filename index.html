@@ -1,107 +1,138 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <!-- FullCalendar CSS -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
-<!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MentorRide - Vaše jízda s jistotou</title>
-    <!-- Připojení externího CSS pro stylování -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Připojení externího Leaflet CSS pro mapu -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.0/dist/fullcalendar.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            margin: 10px;
+            background-color: #28a745;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #218838;
+        }
+
+        .calendar-container {
+            width: 90%;
+            margin: 20px auto;
+            display: none;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Hlavička -->
     <header>
-        <h1>MentorRide</h1>
-        <nav>
-            <a href="#features">Funkce</a>
-            <a href="#map">Mapa</a>
-            <a href="#about">O nás</a>
-            <a href="#contact">Kontakt</a>
-        </nav>
+        <h1>MentorRide - Vaše jízda s jistotou</h1>
     </header>
 
-    <!-- Hlavní část -->
-    <section id="hero">
-        <h2>Vaše jízda s jistotou</h2>
-        <p>Připojte se k platformě, která propojuje nové řidiče s mentory. Získejte praxi a jistotu za volantem.</p>
-        <a href="#register">Začněte ještě dnes</a>
+    <nav>
+        <a href="#features">Funkce</a>
+        <a href="#calendarBtn" id="calendarBtn">Kalendář jízd</a>
+        <a href="#about">O nás</a>
+        <a href="#contact">Kontakt</a>
+    </nav>
+
+    <!-- Sekce Funkce -->
+    <section id="features" style="padding: 20px; background-color: white;">
+        <h2>Naše Funkce</h2>
+        <ul>
+            <li>Plánování jízd</li>
+            <li>Najít mentora</li>
+            <li>Mentoring pro nové řidiče</li>
+            <li>Učení se parkování, dálnic a dalších dovedností</li>
+        </ul>
     </section>
 
-    <!-- Sekce funkcí -->
-    <section id="features" class="features">
-        <div class="feature-box">
-            <h3>Kalendář jízd</h3>
-            <p>Naplánujte si své jízdy rychle a jednoduše.</p>
-            <div class="calendar-container">
-    <h2>Naplánujte si jízdu</h2>
-    <p>Vyberte si datum a čas pro svou jízdu s mentorem.</p>
-    <div id="calendar"></div> <!-- Místo pro kalendář -->
-</div>
-
-        </div>
-        <div class="feature-box">
-            <h3>Najít mentora</h3>
-            <p>Vyhledejte mentora ve vašem okolí a domluvte si schůzku.</p>
-        </div>
-        <div class="feature-box">
-            <h3>Chci být mentorem</h3>
-            <p>Pomáhejte novým řidičům a sdílejte své zkušenosti.</p>
-        </div>
-    </section>
-
-    <!-- Sekce mapa -->
-    <section id="map" class="map-container">
-        <h2>Mentoři ve vašem okolí</h2>
-        <div id="map"></div>
-    </section>
+    <!-- Kalendář jízd -->
+    <div class="calendar-container" id="calendarSection">
+        <h2>Naplánujte si jízdu</h2>
+        <div id="calendar"></div>
+    </div>
 
     <!-- Patička -->
     <footer>
         <p>&copy; 2024 MentorRide | Vaše jízda s jistotou</p>
     </footer>
 
-    <!-- Připojení externího JavaScript pro mapu -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Připojení vlastního JavaScriptu -->
-    <script src="script.js"></script>
     <!-- FullCalendar JS - Inicializace kalendáře -->
-<script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            events: [
-                {
-                    title: 'Mentoring Session',
-                    start: '2024-11-29T10:00:00',
-                    end: '2024-11-29T12:00:00',
-                    description: 'Tréninková jízda s mentorem'
-                },
-                {
-                    title: 'Plánovaná jízda',
-                    start: '2024-12-01T15:00:00',
-                    end: '2024-12-01T17:00:00',
-                    description: 'Jízda na dálnici'
-                }
-            ],
-            eventClick: function(calEvent, jsEvent, view) {
-                alert('Jízda: ' + calEvent.title + '\nPopis: ' + calEvent.description);
-            }
-        });
-    });
-</script>
+    <script>
+        // Inicializace kalendáře
+        $(document).ready(function() {
+            // Skrytí kalendáře na začátku
+            $('#calendarSection').hide();
 
+            // Přepnutí zobrazení kalendáře
+            $('#calendarBtn').click(function() {
+                $('#calendarSection').toggle(); // Zobrazit/skrýt kalendář při kliknutí na tlačítko
+            });
+
+            // Inicializace kalendáře
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: [
+                    {
+                        title: 'Mentoring Session',
+                        start: '2024-11-29T10:00:00',
+                        end: '2024-11-29T12:00:00',
+                        description: 'Tréninková jízda s mentorem'
+                    },
+                    {
+                        title: 'Plánovaná jízda',
+                        start: '2024-12-01T15:00:00',
+                        end: '2024-12-01T17:00:00',
+                        description: 'Jízda na dálnici'
+                    }
+                ],
+                eventClick: function(calEvent, jsEvent, view) {
+                    alert('Jízda: ' + calEvent.title + '\nPopis: ' + calEvent.description);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
