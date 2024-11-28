@@ -4,62 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MentorRide - Vaše jízda s jistotou</title>
-    <!-- Připojení externího CSS pro stylování -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Připojení externího Leaflet CSS pro mapu -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Vlastní CSS -->
+    <style>
+        /* Resetování základního stylu */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        /* Hlavička */
+        header {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Navigace */
+        nav {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 10px;
+            background-color: #e2e6ea;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        /* Hlavní obsah */
+        .main-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-content h2 {
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+
+        .main-content .buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .main-content .buttons a {
+            margin: 0 15px;
+            padding: 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .main-content .buttons a:hover {
+            background-color: #218838;
+        }
+
+        /* Mapa */
+        .map-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        /* Patička */
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Mapa */
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Hlavička -->
     <header>
         <h1>MentorRide</h1>
-        <nav>
-            <a href="#features">Funkce</a>
-            <a href="#map">Mapa</a>
-            <a href="#about">O nás</a>
-            <a href="#contact">Kontakt</a>
-        </nav>
     </header>
 
-    <!-- Hlavní část -->
-    <section id="hero">
+    <nav>
+        <a href="#features">Funkce</a>
+        <a href="#calendarBtn">Kalendář jízd</a>
+        <a href="#about">O nás</a>
+        <a href="#contact">Kontakt</a>
+    </nav>
+
+    <div class="main-content">
         <h2>Vaše jízda s jistotou</h2>
         <p>Připojte se k platformě, která propojuje nové řidiče s mentory. Získejte praxi a jistotu za volantem.</p>
-        <a href="#register">Začněte ještě dnes</a>
-    </section>
+        <a href="#" class="btn btn-primary">Začněte ještě dnes</a>
 
-    <!-- Sekce funkcí -->
-    <section id="features" class="features">
-        <div class="feature-box">
-            <h3>Kalendář jízd</h3>
-            <p>Naplánujte si své jízdy rychle a jednoduše.</p>
+        <div class="buttons">
+            <a href="#calendar">Kalendář jízd</a>
+            <a href="#mentor">Najít mentora</a>
+            <a href="#be-mentor">Chci být mentorem</a>
         </div>
-        <div class="feature-box">
-            <h3>Najít mentora</h3>
-            <p>Vyhledejte mentora ve vašem okolí a domluvte si schůzku.</p>
-        </div>
-        <div class="feature-box">
-            <h3>Chci být mentorem</h3>
-            <p>Pomáhejte novým řidičům a sdílejte své zkušenosti.</p>
-        </div>
-    </section>
+    </div>
 
-    <!-- Sekce mapa -->
-    <section id="map" class="map-container">
-        <h2>Mentoři ve vašem okolí</h2>
+    <div class="map-container">
         <div id="map"></div>
-    </section>
+    </div>
 
-    <!-- Patička -->
     <footer>
         <p>&copy; 2024 MentorRide | Vaše jízda s jistotou</p>
     </footer>
 
-    <!-- Připojení externího JavaScript pro mapu -->
+    <!-- Leaflet JS pro mapu -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Připojení vlastního JavaScriptu -->
-    <script src="script.js"></script>
+    <script>
+        // Inicializace mapy
+        const map = L.map('map').setView([50.0755, 14.4378], 10);
+
+        // Přidání dlaždic OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Přidání markeru
+        L.marker([50.0755, 14.4378]).addTo(map)
+            .bindPopup('<b>MentorRide</b><br>Propojujeme nové řidiče s mentory!');
+    </script>
+
 </body>
 </html>
-
